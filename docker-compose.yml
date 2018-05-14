@@ -1,0 +1,22 @@
+version: '2'
+services:
+  api:
+    build: api/.
+    image: fabiokazaki/api:latest
+    command: npm start
+    working_dir: /app
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - DB=postgresql:/username:password@database-host:port/database
+  web:
+    build: web/.
+    image: fabiokazaki/web:latest
+    command: npm start
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - API_HOST=dns_api.com
